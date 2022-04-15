@@ -1,7 +1,15 @@
 /******************************************
 /* CSS
 /*******************************************/
- 
+@font-face {
+  font-family: 'FinkHeavy';
+  src: url('../FinkHeavy.woff2') format('woff2'),
+      url('../FinkHeavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Box Model Hack */
 *{
   box-sizing: border-box;
@@ -14,6 +22,7 @@
 }
 h1{
   text-align: center;
+  font-family: 'FinkHeavy';
 }
 .fishy{
   position: relative;
@@ -43,7 +52,9 @@ h1{
 p{
   display:none;
 }
-
+.fishy img{
+  width:40%;
+}
 .fishy.clicked p{
   display:contents;
   padding:10px;
@@ -54,6 +65,7 @@ p{
   text-align: center;
   z-index: 0;
   margin:2px 0;
+  font-family: 'FinkHeavy';
 }
 
 /******************************************
@@ -85,3 +97,63 @@ p{
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+
+@media screen and (max-width: 1000px){
+  .fishy img{
+    width:60%;
+  }
+  .fishy{
+    width:20vw;
+  }
+}
+
+
+@media screen and (max-width: 890px) {
+
+  .fishy {
+    width: 25vw;
+  }
+  .fishy h2{
+    font-size: 1.3em;
+  }
+
+}
+@media screen and (max-width: 780px) {
+
+  .fishy {
+    width: 33.3333vw;
+  }
+  .fishy h2{
+    font-size: 1.2em;
+  }
+  .fish img{
+    width:40%;
+  }
+
+}
+@media screen and (max-width: 747px) {
+
+  .fishy {
+    width: 33.3333vw;
+  }
+  .fishy h2{
+    font-size: 1.0em;
+  }
+  .fish img{
+    width:40%;
+  }
+
+}
+@media screen and (max-width: 60px) {
+
+  .fishy {
+    width: 33.3333vw;
+  }
+  .fishy h2{
+    font-size: 1.2em;
+  }
+  .fish img{
+    width:40%;
+  }
+
+}
