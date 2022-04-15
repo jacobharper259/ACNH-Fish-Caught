@@ -17,19 +17,23 @@
             let newH2 =document.createElement('h2') //created a h2 for displayijng fish names
             let fishName=data[i].name['name-USen'] //capitalized the fish name
             let fishImg = document.createElement('img')//created an image
-            fishImg.src=data[i]['icon_uri'] //set the fish image to the icon_uri
+            let p = document.createElement('p')
+            fishImg.src=data[i]['icon_uri']
+            fishImg.alt=data[i]['icon_uri'] //set the fish image to the icon_uri
             newFishy.classList.add(`fish${i}`) //added a classlist to individually select each fish div
             newFishy.classList.add(`fishy`) //added a classlist to all the fish divs for styling
+            p.classList.add('corny')
             newH2.classList.add(`fishyName`)
             fishImg.classList.add(`fishyImg`)
             fishImg.classList.add(`fishicon${i}`) //added classes for all fishIcons
             fishImg.addEventListener('load',hasLoadeded)
             newFishy.addEventListener('click',checkForClick)
-            
+            p.innerHTML = data[i]['catch-phrase']
             newH2.innerText= fishName.charAt(0).toUpperCase() + fishName.slice(1); //set the name for each fish
             document.querySelector('.fish').appendChild(newFishy) //appended the divs to the 'fishy section
             document.querySelector(`.fish${i}`).appendChild(newH2) //appended the h2 to the fish div
             document.querySelector(`.fish${i}`).appendChild(fishImg) //appended the img to the fish div
+            document.querySelector(`.fish${i}`).appendChild(p)
             
             
             if(localStorage.getItem(`fish${i}`)=== 'true'){
@@ -50,7 +54,7 @@ function hasLoadeded(){
 function checkForClick(click){
     let pName= click.target.parentElement.className.split(' ')[0]
     let cName= click.target.className.split(' ')[0]
-    if(click.target.classList.contains('fishyImg') ||click.target.classList.contains('fishyName')){
+    if(click.target.classList.contains('fishyImg') ||click.target.classList.contains('fishyName') ||click.target.classList.contains('corny')){
         if(click.target.parentElement.classList.contains('clicked')){
             click.target.parentElement.classList.remove('clicked')  
             localStorage.setItem(`${pName}`, false)
