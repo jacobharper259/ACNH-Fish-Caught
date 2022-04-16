@@ -206,6 +206,15 @@ p{
     top:0;
     z-index: 200000;
   }
+  .dropdown{
+    
+    display:flex;
+    justify-content: center;
+    height:fit-content;
+    position: sticky;
+    top:0;
+    z-index: 200000;
+  }
   .hero{
     height:0vh;
     overflow-y: clip;
@@ -218,12 +227,15 @@ p{
     height: fit-content;
     border-bottom: 8px solid #211709;
   }
-  .hero h1{
+  .hero.on h1{
+    display:flex;
     margin-top: 10px;
     margin-bottom: 10px;
     width:50vw;
   }
-    
+  .hero h1{
+    display:none;
+  }
   
   .menuButt{
     margin-left:10px;
