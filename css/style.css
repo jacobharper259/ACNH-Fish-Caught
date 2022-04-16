@@ -52,7 +52,7 @@ html{
 p{
   font-size: 10px;
   font-weight: 100;
-  font-family: 'Humming';
+  font-family: 'Humming',sans-serif;
 }
 .item{
   display: flex;
@@ -91,7 +91,7 @@ h1{
   text-shadow: -0.5px -0.5px #ff8c00, 4px 4px #000000b4;
   margin:0;
   text-align: center;
-  font-family: 'FinkHeavy';
+  font-family: 'FinkHeavy', sans-serif;
   cursor:pointer;
   
 }
@@ -139,7 +139,7 @@ h2{
   text-align: center;
   z-index: 0;
   margin:2px 0;
-  font-family: 'FinkHeavy';
+  font-family: 'FinkHeavy', sans-serif;
 }
 .fishy.clicked p{
   display:inline-block;
