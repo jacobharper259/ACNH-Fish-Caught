@@ -52,10 +52,13 @@ if(! localStorage.getItem('lastClicked')){
 }
 
 function create(elementName , urlName,phrase,image){
+    let titleName = elementName.charAt(0).toUpperCase() + elementName.slice(1);
+    
     document.querySelector(`.${elementName}Butt`).addEventListener('click',Section)
     function Section(){
         hideSections()
         menuClick()
+        document.querySelector('title').innerText = `ACNH | ${titleName}`
         document.querySelector('.dropdown').style.top = `0px`
         removeAllChildNodes(parentF)
         theCurrentName =[]
@@ -78,6 +81,7 @@ function create(elementName , urlName,phrase,image){
                 let newH2 =document.createElement('h2') //created a h2 for displaying fish names
                 let fossilName=data[i].name['name-USen'] //capitalized the fish name
                 let fossilImg = document.createElement('img')//created an image
+                
                 
                 let p = document.createElement('p')
                 fossilImg.src=data[i][`${image}`]
@@ -107,6 +111,7 @@ function create(elementName , urlName,phrase,image){
                 }
                 theCurrentName.push(`${elementName}${i}`)
             }
+
         })
     }
 }
