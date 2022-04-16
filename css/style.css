@@ -9,27 +9,132 @@
   font-style: normal;
   font-display: swap;
 }
-
+.doIt{
+	margin:0;
+	padding:0;
+	height:100vh;
+	overflow-y: overlay;
+	overflow-x:hidden;
+	perspective: 10px;
+	
+  }
+  .doIt::-webkit-scrollbar{
+	display:block;
+	width:8px;
+  }
+  
+  .doIt::-webkit-scrollbar-button{
+	display:none;
+  }
+  .doIt::-webkit-scrollbar-track{
+	
+	background-color: transparent;
+  
+  }
+  
+  .doIt::-webkit-scrollbar-thumb {
+	background-color: #828e96ab;
+	border: 1px solid #ffffff40;
+	border-radius: 24px;
+  }
 /* Box Model Hack */
 *{
   box-sizing: border-box;
 }
-.fish{
+html{
+  background-color: #8ecfca;
+  overflow-x: clip;
+}
+
+.item{
   display: flex;
   flex-wrap: wrap;
   width:100vw;
+  justify-content: center;
   
 }
+.hero{
+  top:0;
+  position: sticky;
+  z-index: 300000;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  height:8vw;
+  background-image: url('../dark-wood.png');
+  background-color: #6e501f;
+  border-bottom: 8px solid #211709;
+  
+  width:100vw;
+}
+.menuButt{
+  display:none;
+}
 h1{
+  
+  border:3px solid #30220d;
+  background-image: url(../dark-wood.png), linear-gradient(rgb(187 138 68), rgb(53 53 53 / 17%));
+  background-size:cover;
+  text-decoration:wavy;
+  color: #fcea64;
+  background-color: #ac8f61;
+  padding:10px 30px;
+  border-radius: .5em;
+  text-shadow: -0.5px -0.5px #ff8c00, 4px 4px #000000b4;
+  margin:0;
   text-align: center;
   font-family: 'FinkHeavy';
+  cursor:pointer;
+  
 }
+h1:hover{
+  border:3px solid #fcea64;
+}
+h1.on{
+  border:3px solid #fcea64;
+}
+
+.menuButt:hover{
+  border:3px solid #fcea64;
+  border-top: none;
+}
+
 .fishy{
   position: relative;
   display:flex;
   flex-direction: column;
   align-items: center;
   z-index: 20000;
+  height:24vh;
+  width:20vw;
+  text-align: center;
+}
+.fishy.fossil{
+  width:25vw;
+  height:41vh
+}
+.fishy.art{
+  width:25vw;
+  height:36vh
+}
+
+.fishy.clicked{
+  background-color: rgba(180,252,183);
+}
+.fishy img{
+  width:40%;
+}
+.fish h2{
+  width:20vw;
+  text-align: center;
+  z-index: 0;
+  margin:2px 0;
+  font-family: 'FinkHeavy';
+}
+.fishy.clicked p{
+  display:inline-block;
+  
+  
 }
 .hidden{
   
@@ -41,32 +146,17 @@ h1{
   display:none;
   
 }
-.fishy{
-  height:22vh;
-  width:20vw;
-  text-align: center;
-}
-.fishy.clicked{
-  background-color: #72f072;
-}
+
+
 p{
   display:none;
-}
-.fishy img{
-  width:40%;
-}
-.fishy.clicked p{
-  display:contents;
-  padding:10px;
+  width:90%;
   
+  margin: 0;
 }
-.fish h2{
-  width:20vw;
-  text-align: center;
-  z-index: 0;
-  margin:2px 0;
-  font-family: 'FinkHeavy';
-}
+
+
+
 
 /******************************************
 /* LAYOUT
@@ -106,6 +196,48 @@ p{
     width:20vw;
   }
 }
+@media screen and (max-width: 1111px){
+  .dropdown{
+    
+    display:flex;
+    justify-content: center;
+    height:fit-content;
+    position: sticky;
+    top:0;
+    z-index: 200000;
+  }
+  .hero{
+    height:0vh;
+    overflow-y: clip;
+    flex-direction: column;
+    border-bottom: none;
+    
+    
+  }
+  .hero.on{
+    height: fit-content;
+    border-bottom: 8px solid #211709;
+  }
+  .hero h1{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width:50vw;
+  }
+    
+  
+  .menuButt{
+    margin-left:10px;
+    display:inline-block;
+    
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+  }
+  
+}
+@media screen and (max-width: 1037px){
+  
+}
 
 
 @media screen and (max-width: 890px) {
@@ -132,7 +264,7 @@ p{
 
 }
 @media screen and (max-width: 747px) {
-
+  
   .fishy {
     width: 33.3333vw;
   }
@@ -141,6 +273,18 @@ p{
   }
   .fish img{
     width:40%;
+  }
+  .fishy.fossil{
+    width:50vw;
+    height:60vh;
+  }
+  .fishy.art{
+    width:50vw;
+    height:50vh;
+  
+  }
+  .fishy.music{
+    justify-content: center;
   }
 
 }

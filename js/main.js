@@ -1,56 +1,12 @@
  let hasLoaded = 0;
  let howManyFish
- document.querySelector('.fish').classList.add("hidden")
+ function hideSections(){
+ document.querySelector('.item').classList.add("hidden")
  document.querySelector('.loadwrap').classList.remove("hidden")
- fetch('https://acnhapi.com/v1a/fish/')
-    .then(res => res.json())
-    .then(data =>{
-        console.log(data)
-        howManyFish = data.length
-        for(i=0;i<data.length;i++){
-            if(! localStorage.getItem(`fish${i}`)){
-                localStorage.setItem(`fish${i}`,false)
-                console.log("done")
-            }
-            
-            let newFishy =document.createElement('div') //div for storing fishes into sections
-            let newH2 =document.createElement('h2') //created a h2 for displayijng fish names
-            let fishName=data[i].name['name-USen'] //capitalized the fish name
-            let fishImg = document.createElement('img')//created an image
-            let p = document.createElement('p')
-            fishImg.src=data[i]['icon_uri']
-            fishImg.alt=data[i]['icon_uri'] //set the fish image to the icon_uri
-            newFishy.classList.add(`fish${i}`) //added a classlist to individually select each fish div
-            newFishy.classList.add(`fishy`) //added a classlist to all the fish divs for styling
-            p.classList.add('corny')
-            newH2.classList.add(`fishyName`)
-            fishImg.classList.add(`fishyImg`)
-            fishImg.classList.add(`fishicon${i}`) //added classes for all fishIcons
-            fishImg.addEventListener('load',hasLoadeded)
-            newFishy.addEventListener('click',checkForClick)
-            p.innerHTML = data[i]['catch-phrase']
-            newH2.innerText= fishName.charAt(0).toUpperCase() + fishName.slice(1); //set the name for each fish
-            document.querySelector('.fish').appendChild(newFishy) //appended the divs to the 'fishy section
-            document.querySelector(`.fish${i}`).appendChild(newH2) //appended the h2 to the fish div
-            document.querySelector(`.fish${i}`).appendChild(fishImg) //appended the img to the fish div
-            document.querySelector(`.fish${i}`).appendChild(p)
-            
-            
-            if(localStorage.getItem(`fish${i}`)=== 'true'){
-                document.querySelector(`.fish${i}`).classList.add('clicked')
-            }
-        }
-        
-    })
+ }
+let theCurrentName
+document.querySelector('.hero').classList.remove('on')
 
-function hasLoadeded(){
-    hasLoaded+=1
-    
-    if(hasLoaded===howManyFish){
-        document.querySelector('.fish').classList.remove("hidden")
-        document.querySelector('.loadwrap').classList.add("hidden")
-    }
-}
 function checkForClick(click){
     let pName= click.target.parentElement.className.split(' ')[0]
     let cName= click.target.className.split(' ')[0]
@@ -58,57 +14,130 @@ function checkForClick(click){
         if(click.target.parentElement.classList.contains('clicked')){
             click.target.parentElement.classList.remove('clicked')  
             localStorage.setItem(`${pName}`, false)
-            console.log("click")
+            
         }else{
         click.target.parentElement.classList.add('clicked')
         localStorage.setItem(`${pName}`, true)
-        console.log("click")
+        
         }
     }
     else if(click.target.classList.contains('clicked')){
         click.target.classList.remove('clicked')
         localStorage.setItem(`${cName}`, false)
-        console.log(cName)
+        
     }else{
         click.target.classList.add('clicked')
         localStorage.setItem(`${cName}`, true)
-        console.log(cName)
-    }
-    
-    
-    
-    
-}
-/*
-setTimeout(()=>{
-    for(i=0;i<howManyFish;i++){
-        if(document.querySelector(`.fishicon${i}`).complete){
-            hasLoaded+=1
-        }
         
     }
-    console.log(hasLoaded)
-    if(hasLoaded!=howManyFish){
-    setTimeout(()=>{
-        for(i=0;i<howManyFish;i++){
-            if(document.querySelector(`.fishicon${i}`).complete){
-                hasLoaded+=1
-            }
-            
-        }
-        console.log(hasLoaded)
-        if(hasLoaded!=howManyFish){
-            setTimeout(()=>{
-                for(i=0;i<howManyFish;i++){
-                    if(document.querySelector(`.fishicon${i}`).complete){
-                        hasLoaded+=1
-                    }
+    
+}
+let parentF = document.querySelector('.item')
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+function selectedButt(selectedElement){
+    
+    document.querySelectorAll('h1').forEach(elem=>{
+        elem.classList.remove('on')
+    })
+    document.querySelector(`.${selectedElement}Butt`).classList.add('on')
+    document.querySelector(`.menuButt`).classList.remove('on')
+}
+
+if(! localStorage.getItem('lastClicked')){
+    localStorage.setItem('lastClicked', 'fishButt')
+}
+
+function create(elementName , urlName,phrase,image){
+    document.querySelector(`.${elementName}Butt`).addEventListener('click',Section)
+    function Section(){
+        hideSections()
+        menuClick()
+        removeAllChildNodes(parentF)
+        theCurrentName =[]
+        hasLoaded=0;
+        lastClick = `.${elementName}Butt`
+        selectedButt(`${elementName}`)
+        fetch(`https://acnhapi.com/v1a/${urlName}`)
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data)
+            howManyFish = data.length
+            localStorage.setItem('lastClicked',(`${elementName}Butt`))
+            for(i=0;i<data.length;i++){
+                if(! localStorage.getItem(`${elementName}${i}`)){
+                    localStorage.setItem(`${elementName}${i}`,false)
                     
                 }
-                console.log(hasLoaded)
-                
-            },500)}
-    },500)}
-},500)
-*/
+
+                let newFossil =document.createElement('div') //div for storing fishes into sections
+                let newH2 =document.createElement('h2') //created a h2 for displaying fish names
+                let fossilName=data[i].name['name-USen'] //capitalized the fish name
+                let fossilImg = document.createElement('img')//created an image
+                let p = document.createElement('p')
+                fossilImg.src=data[i][`${image}`]
+                //set the fish image to the icon_uri
+                newFossil.classList.add(`${elementName}${i}`) //added a classlist to individually select each fish div
+                newFossil.classList.add(`fishy`) 
+                newFossil.classList.add(`${elementName}`)//added a classlist to all the fish divs for styling
+                p.classList.add('corny')
+                newH2.classList.add(`fishyName`)
+                fossilImg.classList.add(`fishyImg`)
+                fossilImg.classList.add(`fishicon${i}`) //added classes for all fishIcons
+                fossilImg.addEventListener('load',hasLoadeded)
+                newFossil.addEventListener('click',checkForClick)
+                if(phrase.length>1){
+                p.innerHTML = data[i][`${phrase}`]
+                }
+                newH2.innerText= fossilName.charAt(0).toUpperCase() + fossilName.slice(1); //set the name for each fish
+                document.querySelector('.item').appendChild(newFossil) //appended the divs to the 'fishy section
+                document.querySelector(`.${elementName}${i}`).appendChild(newH2) //appended the h2 to the fish div
+                document.querySelector(`.${elementName}${i}`).appendChild(fossilImg) //appended the img to the fish div
+                document.querySelector(`.${elementName}${i}`).appendChild(newH2) //appended the h2 to the fish div
+                document.querySelector(`.${elementName}${i}`).appendChild(p)
+                if(localStorage.getItem(`${elementName}${i}`)=== 'true'){
+                    document.querySelector(`.${elementName}${i}`).classList.add('clicked')
+                }
+                theCurrentName.push(`${elementName}${i}`)
+            }
+        })
+    }
+}
+
+create('fish','fish','catch-phrase','icon_uri')
+create('fossil','fossils','museum-phrase','image_uri')
+create('sea','sea','catch-phrase','icon_uri')
+create('bug','bugs','catch-phrase','icon_uri')
+create('art','art','museum-desc','image_uri')
+create('music','songs','','image_uri')
+document.querySelector(`.${localStorage.getItem('lastClicked')}`).click()
+document.querySelector('.hero').classList.remove('on')
+function hasLoadeded(){
+    hasLoaded+=1
     
+    if(hasLoaded===howManyFish){
+        document.querySelector('.item').classList.remove("hidden")
+        document.querySelector('.loadwrap').classList.add("hidden")
+    }else{
+        document.querySelector('.item').classList.add("hidden")
+        document.querySelector('.loadwrap').classList.remove("hidden")
+    }
+}
+function goHard(bool){
+    
+    for(i=0;i<howManyFish;i++){
+        localStorage.setItem(theCurrentName[i],`${bool}`)
+        console.log(`set ${theCurrentName[i]} to ${bool}`)
+    }
+}
+
+document.querySelector('.menuButt').addEventListener('click', menuClick)
+function menuClick(){
+    if(document.querySelector('.hero').classList.contains('on')){
+        document.querySelector('.hero').classList.remove('on')
+    }else
+    document.querySelector('.hero').classList.add('on')
+}
