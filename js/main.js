@@ -110,6 +110,7 @@ function create(elementName , urlName,phrase,image){
                     document.querySelector(`.${elementName}${i}`).classList.add('clicked')
                 }
                 theCurrentName.push(`${elementName}${i}`)
+                resizeHeight()
             }
 
         })
@@ -135,6 +136,7 @@ function hasLoadeded(){
     }else{
         document.querySelector('.item').classList.add("hidden")
         document.querySelector('.loadwrap').classList.remove("hidden")
+        resizeHeight()
     }
 }
 
