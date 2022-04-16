@@ -129,9 +129,12 @@ function hasLoadeded(){
     hasLoaded+=1
     
     if(hasLoaded===howManyFish){
+        
         document.querySelector('.item').classList.remove("hidden")
         document.querySelector('.loadwrap').classList.add("hidden")
+        setTimeout(()=>{
         resizeHeight()
+        },10)
     }else{
         document.querySelector('.item').classList.add("hidden")
         document.querySelector('.loadwrap').classList.remove("hidden")
