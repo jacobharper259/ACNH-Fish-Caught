@@ -56,6 +56,7 @@ function create(elementName , urlName,phrase,image){
     function Section(){
         hideSections()
         menuClick()
+        document.querySelector('.dropdown').style.top = `0px`
         removeAllChildNodes(parentF)
         theCurrentName =[]
         hasLoaded=0;
@@ -77,6 +78,7 @@ function create(elementName , urlName,phrase,image){
                 let newH2 =document.createElement('h2') //created a h2 for displaying fish names
                 let fossilName=data[i].name['name-USen'] //capitalized the fish name
                 let fossilImg = document.createElement('img')//created an image
+                
                 let p = document.createElement('p')
                 fossilImg.src=data[i][`${image}`]
                 //set the fish image to the icon_uri
@@ -84,7 +86,9 @@ function create(elementName , urlName,phrase,image){
                 newFossil.classList.add(`fishy`) 
                 newFossil.classList.add(`${elementName}`)//added a classlist to all the fish divs for styling
                 p.classList.add('corny')
+                p.classList.add(`corny${i}`)
                 newH2.classList.add(`fishyName`)
+                newH2.classList.add(`fishyName${i}`)
                 fossilImg.classList.add(`fishyImg`)
                 fossilImg.classList.add(`fishicon${i}`) //added classes for all fishIcons
                 fossilImg.addEventListener('load',hasLoadeded)
@@ -113,6 +117,7 @@ create('sea','sea','catch-phrase','icon_uri')
 create('bug','bugs','catch-phrase','icon_uri')
 create('art','art','museum-desc','image_uri')
 create('music','songs','','image_uri')
+
 document.querySelector(`.${localStorage.getItem('lastClicked')}`).click()
 document.querySelector('.hero').classList.remove('on')
 function hasLoadeded(){
@@ -121,11 +126,32 @@ function hasLoadeded(){
     if(hasLoaded===howManyFish){
         document.querySelector('.item').classList.remove("hidden")
         document.querySelector('.loadwrap').classList.add("hidden")
+        resizeHeight()
     }else{
         document.querySelector('.item').classList.add("hidden")
         document.querySelector('.loadwrap').classList.remove("hidden")
     }
 }
+
+
+function resizeHeight(){
+    let contentsHeight =[]
+    let max = 0
+    for(i=0;i<howManyFish;i++){
+        let imageSize = document.querySelector(`.fishicon${i}`).offsetHeight
+        let headerSize = document.querySelector(`.fishyName${i}`).offsetHeight
+        let cornySize = document.querySelector(`.corny${i}`).offsetHeight
+        let totalSize = imageSize+headerSize+cornySize + 10
+        contentsHeight.push(totalSize)
+        
+    }
+    
+    max = Math.max(...contentsHeight)
+    console.log(`max`)
+    document.querySelectorAll('.fishy').forEach(elem => elem.style.height = `${max}px`)
+}
+
+
 function goHard(bool){
     
     for(i=0;i<howManyFish;i++){
@@ -134,10 +160,20 @@ function goHard(bool){
     }
 }
 
+window.addEventListener('resize', ()=>{
+    let sizing = (document.querySelector('.hero').offsetHeight-10)
+    document.querySelector('.dropdown').style.top = `${sizing}px`
+    
+    resizeHeight()
+})
 document.querySelector('.menuButt').addEventListener('click', menuClick)
 function menuClick(){
     if(document.querySelector('.hero').classList.contains('on')){
         document.querySelector('.hero').classList.remove('on')
+        document.querySelector('.dropdown').classList.remove('on')
+        
     }else
     document.querySelector('.hero').classList.add('on')
+    document.querySelector('.dropdown').style.top = `${document.querySelector('.hero').offsetHeight-10}px`
+    console.log(`${document.querySelector('.hero').offsetHeight}`)
 }

@@ -9,6 +9,10 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Humming';
+  src: url("../Humming.otf") format("opentype");
+}
 .doIt{
 	margin:0;
 	padding:0;
@@ -45,7 +49,11 @@ html{
   background-color: #8ecfca;
   overflow-x: clip;
 }
-
+p{
+  font-size: 10px;
+  font-weight: 100;
+  font-family: 'Humming';
+}
 .item{
   display: flex;
   flex-wrap: wrap;
@@ -117,14 +125,16 @@ h1.on{
   width:25vw;
   height:36vh
 }
-
+.fishy.sea{
+  height:30vh;
+}
 .fishy.clicked{
   background-color: rgba(180,252,183);
 }
 .fishy img{
   width:40%;
 }
-.fish h2{
+h2{
   width:20vw;
   text-align: center;
   z-index: 0;
@@ -232,6 +242,7 @@ p{
     margin-top: 10px;
     margin-bottom: 10px;
     width:50vw;
+    justify-content: center;
   }
   .hero h1{
     display:none;
@@ -247,8 +258,17 @@ p{
   }
   
 }
-@media screen and (max-width: 1037px){
-  
+@media screen and (max-height: 650px){
+  .hero{
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+  }
+  .hero.on h1{
+    font-size: 25px;
+    width:21vw;
+    background-size: 40%;
+  }
 }
 
 
@@ -275,7 +295,7 @@ p{
   }
 
 }
-@media screen and (max-width: 747px) {
+@media screen and (max-width: 749px) {
   
   .fishy {
     width: 33.3333vw;
@@ -295,21 +315,114 @@ p{
     height:50vh;
   
   }
+  .hero{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .hero.on h1{
+    width:27vw
+  }
   .fishy.music{
     justify-content: center;
   }
 
 }
-@media screen and (max-width: 60px) {
-
-  .fishy {
-    width: 33.3333vw;
+@media screen and (max-width: 679px) {
+  .hero{
+    flex-direction: row;
+    flex-wrap: wrap;
   }
-  .fishy h2{
+  .hero.on h1{
+    width:31vw
+  }
+  
+
+}
+@media screen and (max-width: 590px) {
+  .hero{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  h1{
+    font-size: 1.5em;
+  }
+  .hero.on h1{
+    width:31vw;
+    font-size: 1.5em;
+  }
+  
+
+}
+@media screen and (max-width: 508px) {
+  .hero{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  h1{
+    font-size: 1.5em;
+  }
+  .hero.on h1{
+    width:36vw;
+    font-size: 1.5em;
+  }
+  
+
+}
+@media screen and (max-width: 428px) {
+  .hero{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  h1{
+    font-size: 1.5em;
+  }
+  .hero.on h1{
+    width:42vw;
+    font-size: 1.5em;
+  }
+  
+
+}
+@media screen and (max-width: 367px) {
+  .hero{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  h1{
+    font-size: 1.5em;
+  }
+  .hero.on h1{
+    width:47vw;
+    font-size: 1.5em;
+  }
+  
+
+}
+@media screen and (max-width: 324px) {
+  .hero{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  h1{
     font-size: 1.2em;
   }
-  .fish img{
-    width:40%;
+  .hero.on h1{
+    width:47vw;
+    
   }
+  
+
+}
+@media screen and (max-width: 290px) {
+  .hero{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  h1{font-size: 1.1em;}
+  .hero.on h1{
+    width:47vw;
+    
+  }
+  
 
 }
