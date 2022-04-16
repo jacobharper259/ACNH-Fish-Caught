@@ -8,6 +8,7 @@ let theCurrentName
 document.querySelector('.hero').classList.remove('on')
 
 function checkForClick(click){
+    resizeHeight()
     let pName= click.target.parentElement.className.split(' ')[0]
     let cName= click.target.className.split(' ')[0]
     if(click.target.classList.contains('fishyImg') ||click.target.classList.contains('fishyName') ||click.target.classList.contains('corny')){
@@ -96,6 +97,7 @@ function create(elementName , urlName,phrase,image){
                 fossilImg.classList.add(`fishyImg`)
                 fossilImg.classList.add(`fishicon${i}`) //added classes for all fishIcons
                 fossilImg.addEventListener('load',hasLoadeded)
+                
                 newFossil.addEventListener('click',checkForClick)
                 if(phrase.length>1){
                 p.innerHTML = data[i][`${phrase}`]
@@ -134,7 +136,7 @@ function hasLoadeded(){
         document.querySelector('.loadwrap').classList.add("hidden")
         setTimeout(()=>{
         resizeHeight()
-        },10)
+        },300)
     }else{
         document.querySelector('.item').classList.add("hidden")
         document.querySelector('.loadwrap').classList.remove("hidden")
