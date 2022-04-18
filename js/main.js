@@ -49,7 +49,7 @@ function selectedButt(selectedElement){
 }
 
 if(! localStorage.getItem('lastClicked')){
-    localStorage.setItem('lastClicked', 'fishButt')
+    localStorage.setItem('lastClicked', 'homeButt')
 }
 
 function create(elementName , urlName,phrase,image){
