@@ -211,8 +211,6 @@ function progressTracker(elementName){
                 progress +=1
                 
             }
-        }else{
-            localStorage.setItem(`${elementName}sCollected`, '0')
         }
     }
     localStorage.setItem(`${elementName}sCollected`, `${Math.round((progress / total)*100)}%`)
@@ -256,13 +254,18 @@ function createHome (){
         progressTotal.classList.add(`progressTotal`)
         progressSoFar.classList.add(`progressSoFar`)
         progressTracker(`${elementName}`)
+        let progressPerc = document.createElement('h1')
+        progressPerc.classList.add('progressPerc')
+        if(localStorage.getItem(`${elementName}sCollected`) !== 'NaN%'){
+        progressPerc.innerText = localStorage.getItem(`${elementName}sCollected`)
         progressSoFar.style.width = localStorage.getItem(`${elementName}sCollected`)
+        }else{
+            progressPerc.innerText = '0%'
+        }
         document.querySelector(`.${elementName}progress`).appendChild(progressTotal)
         document.querySelector(`.${elementName}progressTotal`).appendChild(progressSoFar)
         
-        let progressPerc = document.createElement('h1')
-        progressPerc.innerText = localStorage.getItem(`${elementName}sCollected`)
-        progressPerc.classList.add('progressPerc')
+        
         document.querySelector(`.${elementName}progress`).appendChild(progressPerc)
     }
     createProgressTrackingFor('fossil')
