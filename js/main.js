@@ -57,6 +57,7 @@ function create(elementName , urlName,phrase,image){
     
     document.querySelector(`.${elementName}Butt`).addEventListener('click',Section)
     function Section(){
+        document.querySelector('.item').classList.remove("home")
         hideSections()
         menuClick()
         document.querySelector('title').innerText = `ACNH | ${titleName}`
@@ -124,7 +125,7 @@ create('sea','sea','catch-phrase','icon_uri')
 create('bug','bugs','catch-phrase','icon_uri')
 create('art','art','museum-desc','image_uri')
 create('music','songs','','image_uri')
-
+document.querySelector('.homeButt').addEventListener('click', createHome)
 document.querySelector(`.${localStorage.getItem('lastClicked')}`).click()
 document.querySelector('.hero').classList.remove('on')
 function hasLoadeded(){
@@ -187,4 +188,92 @@ function menuClick(){
     document.querySelector('.hero').classList.add('on')
     document.querySelector('.dropdown').style.top = `${document.querySelector('.hero').offsetHeight-10}px`
     console.log(`${document.querySelector('.hero').offsetHeight}`)
+}
+function creatLocal(name){
+    if(! localStorage.getItem(`${name}sCollected`)){
+        localStorage.setItem(`${name}sCollected`, '0')
+    }
+}
+creatLocal('bug')
+creatLocal('fossil')
+creatLocal('art')
+creatLocal('sea')
+creatLocal('fish')
+creatLocal('music')
+let string = "words6"
+function progressTracker(elementName){
+    let progress = 0
+    let total = 0
+    for(i=0;i<300;i++){
+        if(localStorage.getItem(`${elementName}${i}`)){
+            total+=1
+            if(localStorage.getItem(`${elementName}${i}`)=== 'true'){
+                progress +=1
+                
+            }
+        }
+    }
+    localStorage.setItem(`${elementName}sCollected`, `${Math.round((progress / total)*100)}%`)
+    
+    
+}
+
+
+function createHome (){
+    removeAllChildNodes(parentF)
+    hideSections()
+    localStorage.setItem('lastClicked',(`homeButt`))
+    selectedButt(`home`)
+    document.querySelector('.item').classList.remove("hidden")
+    document.querySelector('.loadwrap').classList.add("hidden")
+    document.querySelector('.item').classList.add("home")
+    
+    let titleContainer =document.createElement('div')           //Title Container
+    titleContainer.classList.add('progressContainer')           //classlist add
+    document.querySelector('.item').appendChild(titleContainer)//append to main section
+    let newh1 = document.createElement('h1')      //create h1 
+    newh1.innerText ="Progress" //add text to the h1
+    document.querySelector('.progressContainer').appendChild(newh1) //add h1 to the DOM
+
+    function createProgressTrackingFor(elementName){ //create multiple progress tracker with different elements
+        let progressDiv =document.createElement('div') //make a new div for the section                   
+        progressDiv.classList.add(`${elementName}progress`) //add class name "progress"
+        progressDiv.classList.add(`progress`)
+        document.querySelector('.item').appendChild(progressDiv)  //add element to dom   
+        
+        let elementLogo = document.createElement('img') //create img for element
+        elementLogo.src=`${elementName}.png`
+        document.querySelector(`.${elementName}progress`).appendChild(elementLogo)
+
+        
+
+
+        let progressTotal =document.createElement('div') //create progress total
+        let progressSoFar =document.createElement('div') //create progress so far
+        progressTotal.classList.add(`${elementName}progressTotal`)
+        progressTotal.classList.add(`progressTotal`)
+        progressSoFar.classList.add(`progressSoFar`)
+        progressTracker(`${elementName}`)
+        progressSoFar.style.width = localStorage.getItem(`${elementName}sCollected`)
+        document.querySelector(`.${elementName}progress`).appendChild(progressTotal)
+        document.querySelector(`.${elementName}progressTotal`).appendChild(progressSoFar)
+        
+        let progressPerc = document.createElement('h1')
+        progressPerc.innerText = localStorage.getItem(`${elementName}sCollected`)
+        progressPerc.classList.add('progressPerc')
+        document.querySelector(`.${elementName}progress`).appendChild(progressPerc)
+    }
+    createProgressTrackingFor('fossil')
+    createProgressTrackingFor('fish')
+    createProgressTrackingFor('sea')
+    createProgressTrackingFor('bug')
+    createProgressTrackingFor('art')
+    createProgressTrackingFor('music')
+    
+
+
+    
+    
+    
+    
 }
