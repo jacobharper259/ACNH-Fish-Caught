@@ -241,6 +241,7 @@ function dropDown(){
 
 function createHome (){
     document.querySelector('title').innerText = "ACNH Progress Guide"
+    menuClick()
     removeAllChildNodes(parentF)
     hideSections()
     localStorage.setItem('lastClicked',(`homeButt`))
