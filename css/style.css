@@ -13,6 +13,13 @@
   font-family: 'Humming';
   src: url("../Humming.otf") format("opentype");
 }
+@media (max-width: 1024px){
+body, html {
+/* height: 100%!important; */
+overflow: auto!important;
+max-height: 100% !important;
+}
+}
 body{
   background-image: url('../original.png');
   
