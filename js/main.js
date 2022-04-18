@@ -135,9 +135,13 @@ function hasLoadeded(){
         
         document.querySelector('.item').classList.remove("hidden")
         document.querySelector('.loadwrap').classList.add("hidden")
+        if(document.querySelector('.dropdown').offsetHeight>=10){
+        dropDown()
+        }
         setTimeout(()=>{
         resizeHeight()
-        },300)
+        
+        },100)
     }else{
         document.querySelector('.item').classList.add("hidden")
         document.querySelector('.loadwrap').classList.remove("hidden")
@@ -161,6 +165,7 @@ function resizeHeight(){
     max = Math.max(...contentsHeight)
     console.log(`max`)
     document.querySelectorAll('.fishy').forEach(elem => elem.style.height = `${max}px`)
+    
 }
 
 
@@ -173,9 +178,11 @@ function goHard(bool){
 }
 
 window.addEventListener('resize', ()=>{
-    let sizing = (document.querySelector('.hero').offsetHeight-10)
+    let sizing = (document.querySelector('.hero').offsetHeight-1)
     document.querySelector('.dropdown').style.top = `${sizing}px`
     
+        dropDown()
+        
     resizeHeight()
 })
 document.querySelector('.menuButt').addEventListener('click', menuClick)
@@ -186,7 +193,7 @@ function menuClick(){
         
     }else
     document.querySelector('.hero').classList.add('on')
-    document.querySelector('.dropdown').style.top = `${document.querySelector('.hero').offsetHeight-10}px`
+    document.querySelector('.dropdown').style.top = `${document.querySelector('.hero').offsetHeight-1}px`
     console.log(`${document.querySelector('.hero').offsetHeight}`)
 }
 function creatLocal(name){
@@ -217,9 +224,23 @@ function progressTracker(elementName){
     
     
 }
-
+function dropDown(){
+    let number = document.querySelector('.dropdown').offsetHeight
+    console.log(number)
+    if(document.querySelector('.dropdown').offsetHeight>=10){
+        document.querySelector('.item').style.paddingTop = `${number}px`
+        document.querySelector('.item').style.top = `0px`
+        document.querySelector('.item').style.position = `absolute`
+    }else{
+        document.querySelector('.item').style.paddingTop = `0px`
+        document.querySelector('.item').style.top = `0px`
+        document.querySelector('.item').style.position = `relative`
+    }
+    
+}
 
 function createHome (){
+    document.querySelector('title').innerText = "ACNH Progress Guide"
     removeAllChildNodes(parentF)
     hideSections()
     localStorage.setItem('lastClicked',(`homeButt`))
