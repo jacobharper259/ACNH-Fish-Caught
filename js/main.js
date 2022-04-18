@@ -212,7 +212,7 @@ function progressTracker(elementName){
                 
             }
         }else{
-            localStorage.setItem(`${name}sCollected`, '0')
+            localStorage.setItem(`${elementName}sCollected`, '0')
         }
     }
     localStorage.setItem(`${elementName}sCollected`, `${Math.round((progress / total)*100)}%`)
