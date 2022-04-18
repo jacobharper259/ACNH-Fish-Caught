@@ -19,7 +19,7 @@ body, html {
 /* height: 100%!important; */
 overflow: auto!important;
 max-height: 100% !important;
-overscroll-behavior:none;
+overscroll-behavior-y:none;
 }
 }
 body{
