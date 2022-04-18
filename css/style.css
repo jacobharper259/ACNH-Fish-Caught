@@ -12,6 +12,7 @@
 @font-face {
   font-family: 'Humming';
   src: url("../Humming.otf") format("opentype");
+  font-display: swap;
 }
 @media (max-width: 1024px){
 body, html {

@@ -10,7 +10,7 @@ let theCurrentName
 document.querySelector('.hero').classList.remove('on')
 
 function checkForClick(click){
-    resizeHeight()
+    
     let pName= click.target.parentElement.className.split(' ')[0]
     let cName= click.target.className.split(' ')[0]
     if(click.target.classList.contains('fishyImg') ||click.target.classList.contains('fishyName') ||click.target.classList.contains('corny')){
@@ -143,7 +143,7 @@ function hasLoadeded(){
         setTimeout(()=>{
         resizeHeight()
         
-        },100)
+        },40)
     }else{
         document.querySelector('.item').classList.add("hidden")
         document.querySelector('.loadwrap').classList.remove("hidden")
@@ -165,7 +165,7 @@ function resizeHeight(){
     }
     
     max = Math.max(...contentsHeight)
-    console.log(`max`)
+    
     document.querySelectorAll('.fishy').forEach(elem => elem.style.height = `${max}px`)
     
 }
@@ -175,7 +175,6 @@ function goHard(bool){
     
     for(i=0;i<howManyFish;i++){
         localStorage.setItem(theCurrentName[i],`${bool}`)
-        console.log(`set ${theCurrentName[i]} to ${bool}`)
     }
 }
 
@@ -196,7 +195,7 @@ function menuClick(){
     }else
     document.querySelector('.hero').classList.add('on')
     document.querySelector('.dropdown').style.top = `${document.querySelector('.hero').offsetHeight-1}px`
-    console.log(`${document.querySelector('.hero').offsetHeight}`)
+    
 }
 function creatLocal(name){
     if(! localStorage.getItem(`${name}sCollected`)){
@@ -222,16 +221,17 @@ function progressTracker(elementName){
             }
         }
     }
-    localStorage.setItem(`${elementName}sCollected`, `${Math.round((progress / total)*100)}%`)
+    localStorage.setItem(`${elementName}sCollected`, `${Math.round((progress / total)*100)}`)
     
     
 }
 function dropDown(){
     let number = document.querySelector('.dropdown').offsetHeight
-    console.log(number)
+    
     if(document.querySelector('.dropdown').offsetHeight>=10){
         document.querySelector('.item').style.paddingTop = `${number}px`
         document.querySelector('.item').style.top = `0px`
+        document.querySelector('.dropdown').style.top = `0px`
         document.querySelector('.item').style.position = `absolute`
     }else{
         document.querySelector('.item').style.paddingTop = `0px`
@@ -246,7 +246,7 @@ function createHome (){
     menuClick()
     removeAllChildNodes(parentF)
     hideSections()
-    dropDown()
+    
     localStorage.setItem('lastClicked',(`homeButt`))
     selectedButt(`home`)
     document.querySelector('.item').classList.remove("hidden")
@@ -282,16 +282,52 @@ function createHome (){
         let progressPerc = document.createElement('h1')
         progressPerc.classList.add('progressPerc')
         if(localStorage.getItem(`${elementName}sCollected`) !== 'NaN%'){
-        progressPerc.innerText = localStorage.getItem(`${elementName}sCollected`)
-        progressSoFar.style.width = localStorage.getItem(`${elementName}sCollected`)
+            if(progressSoFar.offsetWidth <= progressTotal.offsetWidth){
+                let i =0
+                if(i<100){
+               window.setInterval(()=>{
+                if(i<Number(localStorage.getItem(`${elementName}sCollected`))){
+                i++
+                }
+                progressSoFar.style.width= `${i}%`
+                progressPerc.innerText = `${i}%`
+                
+                },1000/70)      
+                
+            }
+           
+        }
+            
+            
         }else{
             progressPerc.innerText = '0%'
         }
         document.querySelector(`.${elementName}progress`).appendChild(progressTotal)
         document.querySelector(`.${elementName}progressTotal`).appendChild(progressSoFar)
-        
-        
+        dropDown()
+        setTimeout(()=>{
+            dropDown()
+        },10)
+        setTimeout(()=>{
+            dropDown()
+        },50)
+        setTimeout(()=>{
+            dropDown()
+        },100)
+        setTimeout(()=>{
+            dropDown()
+        },200)
+        setTimeout(()=>{
+            dropDown()
+        },300)
+        setTimeout(()=>{
+            dropDown()
+        },500)
+        setTimeout(()=>{
+            dropDown()
+        },1000)
         document.querySelector(`.${elementName}progress`).appendChild(progressPerc)
+        
     }
     createProgressTrackingFor('fossil')
     createProgressTrackingFor('fish')
@@ -299,7 +335,7 @@ function createHome (){
     createProgressTrackingFor('bug')
     createProgressTrackingFor('art')
     createProgressTrackingFor('music')
-    dropDown()
+    
 
 
     
