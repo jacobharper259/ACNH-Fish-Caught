@@ -1,9 +1,11 @@
  let hasLoaded = 0;
  let howManyFish
+ dropDown()
  function hideSections(){
  document.querySelector('.item').classList.add("hidden")
  document.querySelector('.loadwrap').classList.remove("hidden")
  }
+
 let theCurrentName
 document.querySelector('.hero').classList.remove('on')
 
@@ -182,7 +184,7 @@ window.addEventListener('resize', ()=>{
     document.querySelector('.dropdown').style.top = `${sizing}px`
     
         dropDown()
-        
+    
     resizeHeight()
 })
 document.querySelector('.menuButt').addEventListener('click', menuClick)
@@ -244,6 +246,7 @@ function createHome (){
     menuClick()
     removeAllChildNodes(parentF)
     hideSections()
+    dropDown()
     localStorage.setItem('lastClicked',(`homeButt`))
     selectedButt(`home`)
     document.querySelector('.item').classList.remove("hidden")
@@ -296,7 +299,7 @@ function createHome (){
     createProgressTrackingFor('bug')
     createProgressTrackingFor('art')
     createProgressTrackingFor('music')
-    
+    dropDown()
 
 
     
