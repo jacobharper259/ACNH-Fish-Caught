@@ -54,7 +54,7 @@ if(! localStorage.getItem('lastClicked')){
     localStorage.setItem('lastClicked', 'homeButt')
 }
 
-function create(elementName , urlName,phrase,image){
+function create(elementName , urlName,phrase,image,price){
     let titleName = elementName.charAt(0).toUpperCase() + elementName.slice(1);
     
     document.querySelector(`.${elementName}Butt`).addEventListener('click',Section)
@@ -102,9 +102,19 @@ function create(elementName , urlName,phrase,image){
                 fossilImg.addEventListener('load',hasLoadeded)
                 
                 newFossil.addEventListener('click',checkForClick)
-                if(phrase.length>1){
-                p.innerHTML = data[i][`${phrase}`]
+                if(localStorage.getItem('setquotes')==='true'){
+                    if(phrase.length>1){
+                    p.innerHTML = data[i][`${phrase}`]
+                    }
                 }
+                if(localStorage.getItem('setprices')==='true'){
+                    
+                    p.innerHTML=`${data[i][`${price}`]} <img class=bells src="img/bells.png" alt="">`
+                  //  p.innerHTML= '<i class="fa-solid fa-sack-dollar"></i>'
+
+                }
+
+
                 newH2.innerText= fossilName.charAt(0).toUpperCase() + fossilName.slice(1); //set the name for each fish
                 document.querySelector('.item').appendChild(newFossil) //appended the divs to the 'fishy section
                 document.querySelector(`.${elementName}${i}`).appendChild(newH2) //appended the h2 to the fish div
@@ -115,18 +125,56 @@ function create(elementName , urlName,phrase,image){
                     document.querySelector(`.${elementName}${i}`).classList.add('clicked')
                 }
                 theCurrentName.push(`${elementName}${i}`)
+
+                if(localStorage.getItem('setuncaught')==='false' || localStorage.getItem('setcaught')==='false'){
+                    if(localStorage.getItem('setuncaught')==='true'){
+                        if(localStorage.getItem(`${elementName}${i}`) === 'true'){
+                            document.querySelector(`.${elementName}${i}`).classList.add('hidden')
+                        }
+                    }
+                    if(localStorage.getItem('setcaught')==='true'){
+                        if(localStorage.getItem(`${elementName}${i}`) === 'true'){
+                            document.querySelector(`.${elementName}${i}`).classList.remove('hidden')
+                        }
+                        if(localStorage.getItem(`${elementName}${i}`) === 'false'){
+                            document.querySelector(`.${elementName}${i}`).classList.add('hidden')
+                        }
+                    }
+                }
+                if(localStorage.getItem('setcatchable') === 'false' || localStorage.getItem('setuncatchable') === 'false'){
+                    if(localStorage.getItem('setcatchable') === 'true'){
+                        if(data[i]['availability']){
+                            if(! data[i]['availability']['time-array'].includes(Number(localStorage.getItem('setTimeConverted')))){
+                                document.querySelector(`.${elementName}${i}`).classList.add('hidden')
+                            }
+                            if(! data[i]['availability'][`month-array-${localStorage.getItem('setHemi')}`].includes(Number(localStorage.getItem('setmonthConverted')))){
+                                document.querySelector(`.${elementName}${i}`).classList.add('hidden')
+                            }
+                        }
+                    }
+                    if(localStorage.getItem('setuncatchable') === 'true'){
+                        if(data[i]['availability']){
+                            if(data[i]['availability']['time-array'].includes(Number(localStorage.getItem('setTimeConverted')))){
+                                document.querySelector(`.${elementName}${i}`).classList.add('hidden')
+                            }
+                            if(data[i]['availability'][`month-array-${localStorage.getItem('setHemi')}`].includes(Number(localStorage.getItem('setmonthConverted')))){
+                                document.querySelector(`.${elementName}${i}`).classList.add('hidden')
+                            }
+                        }
+                    }
+                }
             }
 
         })
     }
 }
 
-create('fish','fish','catch-phrase','icon_uri')
-create('fossil','fossils','museum-phrase','image_uri')
-create('sea','sea','catch-phrase','icon_uri')
-create('bug','bugs','catch-phrase','icon_uri')
-create('art','art','museum-desc','image_uri')
-create('music','songs','','image_uri')
+create('fish','fish','catch-phrase','icon_uri','price')
+create('fossil','fossils','museum-phrase','image_uri','price')
+create('sea','sea','catch-phrase','icon_uri','price')
+create('bug','bugs','catch-phrase','icon_uri', 'price')
+create('art','art','museum-desc','image_uri','sell-price')
+create('music','songs','','image_uri','sell-price')
 document.querySelector('.homeButt').addEventListener('click', createHome)
 document.querySelector(`.${localStorage.getItem('lastClicked')}`).click()
 document.querySelector('.hero').classList.remove('on')
@@ -178,6 +226,27 @@ function goHard(bool){
         localStorage.setItem(theCurrentName[i],`${bool}`)
     }
 }
+
+
+
+
+
+
+document.querySelector('.doIt').addEventListener('scroll', ()=>{
+    if(document.querySelector('.hero').classList.contains('on')){
+        document.querySelector('.hero').classList.remove('on')
+        dropDown()
+    }
+})
+
+
+
+
+
+
+
+
+
 
 window.addEventListener('resize', ()=>{
     let sizing = (document.querySelector('.hero').offsetHeight-1)
@@ -285,7 +354,7 @@ function createHome (){
         if(localStorage.getItem(`${elementName}sCollected`) !== 'NaN%'){
             if(progressSoFar.offsetWidth <= progressTotal.offsetWidth){
                 let i =0
-                if(i<100){
+                if(i<=100){
                var timer = setInterval(()=>{
                 if(i<Number(localStorage.getItem(`${elementName}sCollected`))){
                 i++
@@ -293,7 +362,8 @@ function createHome (){
                 
                 progressSoFar.style.width= `${i}%`
                 progressPerc.innerText = `${i}%`
-                if(i===100){clearInterval(timer)}
+                
+                if(i===localStorage.getItem(`${elementName}sCollected`)) clearInterval(timer)
                 },1000/160)
                       
                 
@@ -339,11 +409,161 @@ function createHome (){
     createProgressTrackingFor('bug')
     createProgressTrackingFor('art')
     createProgressTrackingFor('music')
+
+}
+let monthConverted
+let set = false
+document.querySelector('.settingsButt').addEventListener('click', settings)
+let timeConverted 
+function changeTime(time,dayPart){
+    if(dayPart==='AM'){
+        if(time===12){
+            time=0;
+        }
+        if(time!==12){
+        timeConverted = time
+        }
+    }
+    if(dayPart==='PM'){
+        if(time===12){
+            timeConverted=12;
+        }
+        if(time!==12){
+        timeConverted = time + 12
+        }
+        
+        
+    }
+    
+}
+
+function changeMonth (month){
+    if(month==="January"){
+        monthConverted=1
+    }
+    if(month==="February"){
+        monthConverted=2
+    }
+    if(month==="March"){
+        monthConverted=3
+    }
+    if(month==="April"){
+        monthConverted=4
+    }
+    if(month==="May"){
+        monthConverted=5
+    }
+    if(month==="June"){
+        monthConverted=6
+    }
+    if(month==="July"){
+        monthConverted=7
+    }
+
+    if(month==="August"){
+        monthConverted=8
+    }
+    if(month==="September"){
+        monthConverted=9
+    }
+    if(month==="October"){
+        monthConverted=10
+    }
+    if(month==="November"){
+        monthConverted=11
+    }
+    if(month==="December"){
+        monthConverted=12
+    }
+}
+function createSettingsStore(name,standard){
+    if(! localStorage.getItem(`${name}`)){
+        localStorage.setItem(`${name}`,`${standard}`)
+    }
+}
+
+createSettingsStore('setcatchable','true')
+createSettingsStore('setuncatchable','true')
+createSettingsStore('setcaught','true')
+createSettingsStore('setuncaught','true')
+createSettingsStore('setquotes','true')
+createSettingsStore('setprices','false')
+createSettingsStore('setMonth','April')
+createSettingsStore('setTime','7')
+createSettingsStore('setamPM','PM')
+createSettingsStore('setHemi','Northern')
+createSettingsStore('setmonthConverted','4')
+createSettingsStore('setTimeConverted','19')
+function settings (){
+    document.querySelectorAll('.fa-circle-check').forEach((elem)=>{
+        if(localStorage.getItem(`set${elem.classList.value.split(' ')[2]}`) === 'true'){
+            elem.classList.add('click')
+        }else{
+            elem.classList.remove('click')
+        }
+    })
+    document.querySelector('.settings').classList.toggle('hidden')
+    document.querySelector('.Dcaught').addEventListener('click', ()=>{
+        document.querySelector('.fa-solid.caught').classList.toggle('click')
+    })
+    document.querySelector('.Duncaught').addEventListener('click', ()=>{
+        document.querySelector('.fa-solid.uncaught').classList.toggle('click')
+    })
+    document.querySelector('.Dcatchable').addEventListener('click', ()=>{
+        document.querySelector('.fa-solid.catchable').classList.toggle('click')
+    })
+    document.querySelector('.Duncatchable').addEventListener('click', ()=>{
+        document.querySelector('.fa-solid.uncatchable').classList.toggle('click')
+    })
+    document.querySelector('.Dquotes').addEventListener('click', ()=>{
+        document.querySelector('.fa-solid.quotes').classList.toggle('click')
+        document.querySelector('.fa-solid.prices').classList.toggle('click')
+    })
+    document.querySelector('.Dprices').addEventListener('click', ()=>{
+        document.querySelector('.fa-solid.prices').classList.toggle('click')
+        document.querySelector('.fa-solid.quotes').classList.toggle('click')
+    })
+
+    document.querySelector('.month').value= localStorage.getItem('setMonth')
+    
+    
+    document.querySelector('.time').value= `${localStorage.getItem('setTime')}:00`
     
 
+    document.querySelector('.amPM').value= localStorage.getItem('setamPM')
+    
+    
+    document.querySelector('.noSo').value= localStorage.getItem('setHemi').charAt(0).toUpperCase() + localStorage.getItem('setHemi').slice(1)
 
-    
-    
-    
-    
+    document.querySelector('.sort').addEventListener('click', applySet)
+}
+
+
+
+function applySet(){
+    document.querySelectorAll('.fa-circle-check').forEach((elem)=>{
+        if(elem.classList.contains('click')){
+            localStorage.setItem(`set${elem.classList.value.split(' ')[2]}`,'true')
+        }else{
+            localStorage.setItem(`set${elem.classList.value.split(' ')[2]}`,'false')
+        }
+    })
+    document.querySelector('.settings').classList.add('hidden')
+    localStorage.setItem('setMonth', `${document.querySelector('.month').value}`)
+    if(document.querySelector('.time').value.length ===5){
+        localStorage.setItem('setTime', `${document.querySelector('.time').value.charAt(0)}${document.querySelector('.time').value.charAt(1)}`)
+    }
+    if(document.querySelector('.time').value.length !==5){
+        localStorage.setItem('setTime', `${document.querySelector('.time').value.charAt(0)}`)
+    }
+    localStorage.setItem('setamPM', `${document.querySelector('.amPM').value}`)
+    localStorage.setItem('setHemi', `${document.querySelector('.noSo').value.toLowerCase()}`)
+    changeTime(Number(localStorage.getItem('setTime')),localStorage.getItem('setamPM'))
+    console.log(timeConverted)
+    localStorage.setItem('setTimeConverted', timeConverted)
+    changeMonth(document.querySelector('.month').value)
+    localStorage.setItem('setmonthConverted', `${monthConverted}`)
+    setTimeout(()=>{
+        location.reload()
+    },1000)
 }

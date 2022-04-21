@@ -3,7 +3,7 @@
 /*******************************************/
 @font-face {
   font-family: 'FinkHeavy';
-  src: url('../Fonts/FinkHeavy.ttf') format('woff2'),
+  src: url('../Fonts/FinkHeavy.woff') format('woff2'),
       url('..//Fonts/FinkHeavy.woff2') format('woff');
   font-weight: 900;
   font-style: normal;
@@ -150,7 +150,7 @@ h1.on{
   height:30vh;
 }
 .fishy.clicked{
-  background-color: rgb(132 248 0 / 19%);
+  background-color: rgb(185 255 105 / 39%);
 }
 .fishy img{
   width:40%;
@@ -168,11 +168,7 @@ h2{
   
   
 }
-.hidden{
-  
-  display:none;
-  
-}
+
 .loadwrap.hidden{
   
   display:none;
@@ -260,7 +256,96 @@ p{
   max-height: 90%;
 }
 
+.settings{
+  position: fixed;
+  z-index: 10000001;
+  display:flex;
+  height:100%;
+  background: #161616b8;
+  width:100%;
+  justify-content: center;
+  align-items: center;
+}
 
+.settings div{
+  padding:10px;
+  position: fixed;
+  
+  width:fit-content;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #5e4d32;
+  
+  border:3px solid #30220d;
+  background-image: url(../img/dark-wood.png), linear-gradient(rgb(187 138 68), rgb(53 53 53 / 17%));
+  background-size:120%;
+  border:8px solid #281c0b;
+  
+  border-radius:.4em
+  
+}
+.settings div div {
+  padding-top: 15px;
+  flex-direction: row;
+  position: relative;
+  top:0;
+  background-image: none;
+  border:none;
+  background: none;
+  
+}
+.settings h2{
+  width:fit-content;
+  color: #fcea64;
+  font-size: 1.5em;
+  text-shadow: -0.5px -0.5px #ff8c00, 4px 4px #000000b4;
+  
+}
+.settings .click{
+  color: rgb(123,182,150);
+  background-color: #fcea64;
+  
+  
+}
+.settings i{
+  display:flex;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #fcea64;
+  width:fit-content;
+  height:max-content;
+  border:1px solid #fcea64;
+  color: #000000;
+
+  
+}
+.settings h1{
+  margin-top: 20px;
+  width:fit-content;
+  font-size: 30px;
+
+}
+.buttContainer .settingsButt{
+  position: fixed;
+  bottom:10px;
+  right:10px;
+  z-index: 10000002;
+  display:flex;
+  border-radius: 50%;
+  padding:0;
+  text-align: center;
+  width:60px;
+  height:60px;
+  justify-content: center;
+  align-items: center;
+}
+.hidden{
+  
+  display:none;
+  
+}
 /******************************************
 /* LAYOUT
 /*******************************************/
@@ -435,6 +520,15 @@ p{
     justify-content: center;
   }
 
+}
+.corny .bells{
+  width:unset;
+  height:30px;
+}
+.item .fishy .corny{
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 @media screen and (max-width: 679px) {
   .hero{
