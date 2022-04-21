@@ -147,6 +147,7 @@ function hasLoadeded(){
     }else{
         document.querySelector('.item').classList.add("hidden")
         document.querySelector('.loadwrap').classList.remove("hidden")
+
         
     }
 }
@@ -267,7 +268,7 @@ function createHome (){
         document.querySelector('.item').appendChild(progressDiv)  //add element to dom   
         
         let elementLogo = document.createElement('img') //create img for element
-        elementLogo.src=`${elementName}.png`
+        elementLogo.src=`img/${elementName}.png`
         document.querySelector(`.${elementName}progress`).appendChild(elementLogo)
 
         
@@ -285,16 +286,19 @@ function createHome (){
             if(progressSoFar.offsetWidth <= progressTotal.offsetWidth){
                 let i =0
                 if(i<100){
-               window.setInterval(()=>{
+               var timer = setInterval(()=>{
                 if(i<Number(localStorage.getItem(`${elementName}sCollected`))){
                 i++
                 }
+                
                 progressSoFar.style.width= `${i}%`
                 progressPerc.innerText = `${i}%`
-                
-                },1000/70)      
+                if(i===100){clearInterval(timer)}
+                },1000/160)
+                      
                 
             }
+            
            
         }
             
