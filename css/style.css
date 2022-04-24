@@ -279,7 +279,7 @@ p{
   background-color: #5e4d32;
   
   border:3px solid #30220d;
-  background-image: url(../img/dark-wood.png), linear-gradient(rgb(187 138 68), rgb(53 53 53 / 17%));
+  background-image: url(../img/dark-wood.png), linear-gradient(rgb(153 112 55), rgb(88 71 26 / 51%));
   background-size:120%;
   border:8px solid #281c0b;
   
@@ -396,11 +396,11 @@ p{
     z-index: 200000;
   }
   .dropdown{
-    
+    width:100%;
     display:flex;
     justify-content: center;
     height:fit-content;
-    position: sticky;
+    position: fixed;
     top:0;
     z-index: 200000;
   }
