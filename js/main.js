@@ -502,6 +502,19 @@ function settings (){
             elem.classList.remove('click')
         }
     })
+
+    document.querySelectorAll('select').forEach((elem)=>{
+        elem.addEventListener('change', ()=>{
+            document.querySelector('.sort').classList.remove('unchanged')
+            document.querySelector('.sort').addEventListener('click', applySet)
+        })
+    })
+    document.querySelectorAll('.settings div div').forEach((elem)=>{
+        elem.addEventListener('click', ()=>{
+            document.querySelector('.sort').classList.remove('unchanged')
+            document.querySelector('.sort').addEventListener('click', applySet)
+        })
+    })
     document.querySelector('.settings').classList.toggle('hidden')
     document.querySelector('.Dcaught').addEventListener('click', ()=>{
         document.querySelector('.fa-solid.caught').classList.toggle('click')
@@ -535,7 +548,7 @@ function settings (){
     
     document.querySelector('.noSo').value= localStorage.getItem('setHemi').charAt(0).toUpperCase() + localStorage.getItem('setHemi').slice(1)
 
-    document.querySelector('.sort').addEventListener('click', applySet)
+    
 }
 
 

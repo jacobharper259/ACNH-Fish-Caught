@@ -74,10 +74,11 @@ p{
   width:100vw;
   justify-content: center;
   background-color: rgb(142 207 202 / 82%);
-  
+  padding-bottom: 50vh;
 }
 .item.home{
   background-color: transparent;
+  
 }
 .hero{
   top:0;
@@ -346,6 +347,20 @@ p{
   display:none;
   
 }
+select{
+  font-family: 'FinkHeavy', sans-serif;
+  border-color: #fcea64;
+  color:#fcea64;
+  background-color: rgba(0, 0, 0, 0.235);
+  border-radius: 1em;
+  height:max-content;
+  padding:4px;
+
+}
+.unchanged {
+  color: #c3bc6342;
+  text-shadow: 1px 1px #000000b4;
+}
 /******************************************
 /* LAYOUT
 /*******************************************/
@@ -437,6 +452,11 @@ p{
   }
   
 }
+@media screen and (max-height: 540px){
+  .progress{
+    height:17vh;
+  }
+}
 @media screen and (max-height: 650px){
   .hero{
     flex-direction: row;
@@ -451,7 +471,7 @@ p{
 }
 @media screen and (max-height: 712px){
   .progress{
-    height:17vh;
+    height:13vh;
   }
   .progressPerc{
     padding-left: 16px;
@@ -588,6 +608,19 @@ p{
   }
 
 }
+
+@media screen and (max-width: 412px) {
+  .settings select{
+    font-size: .9em;
+  }
+  .settings h2{
+    font-size: 1.4em;
+  }
+  .settings i{
+    font-size: 1em;
+  }
+
+}
 @media screen and (max-width: 367px) {
   .hero{
     flex-direction: row;
@@ -600,7 +633,30 @@ p{
     width:47vw;
     font-size: 1.5em;
   }
+
+  .settings select{
+    font-size: .7em;
+  }
+  .settings h2{
+    font-size: 1.3em;
+  }
+  .settings i{
+    font-size: 0.8em;
+  }
+
+}
+@media screen and (max-width: 338px) {
   
+
+  .settings select{
+    font-size: .6em;
+  }
+  .settings h2{
+    font-size: 1.2em;
+  }
+  .settings i{
+    font-size: 0.7em;
+  }
 
 }
 @media screen and (max-width: 324px) {
