@@ -358,12 +358,14 @@ select{
 
 }
 .unchanged {
-  color: #c3bc6342;
-  text-shadow: 1px 1px #000000b4;
+    color: #c3bc6342;
+    text-shadow: 1px 1px #000000b4;
 }
 /******************************************
 /* LAYOUT
 /*******************************************/
+
+
 .loadwrap{
   display:flex;
   justify-content: center;
@@ -372,6 +374,7 @@ select{
   flex-direction:row;
   align-items: center;
 }
+
 .loader {
   border: 16px solid #fbffde;
   border-top: 16px solid #4fd6bf;
