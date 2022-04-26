@@ -554,7 +554,7 @@ function settings (){
 
 
 function applySet(){
-    window.navigator.vibrate(200);
+    
     document.querySelectorAll('.fa-circle-check').forEach((elem)=>{
         if(elem.classList.contains('click')){
             localStorage.setItem(`set${elem.classList.value.split(' ')[2]}`,'true')
