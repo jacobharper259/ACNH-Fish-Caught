@@ -374,7 +374,9 @@ select{
   flex-direction:row;
   align-items: center;
 }
-
+.progress h1:hover{
+  border:3px solid #281c0b;
+}
 .loader {
   border: 16px solid #fbffde;
   border-top: 16px solid #4fd6bf;
