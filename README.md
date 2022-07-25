@@ -10,9 +10,11 @@ that the item has been found. Each individual item is stored as a local storage 
 and there is zero fuss about making an account. 
 
 
-#Optimizations
+# Optimizations
 Using the api calls seperately drastically reduced the load time of data. Implementing a load screen to load images behind the scenes, made the software 
 easier to view and created an overall better user experience. The settings screen allowed users to sort by date and time and by "caught and uncaught".
 
-#Lessons Learned
-OOP would have significantly decreased the amount of time spent of this project. I learned a lot about local storage 
+# Lessons Learned
+OOP would have significantly decreased the amount of time spent of this project. I learned a lot about local storage and how to configure storing objects into local storage to keep user progress.
+# Examples 
+
